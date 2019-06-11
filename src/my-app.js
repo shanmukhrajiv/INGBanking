@@ -101,7 +101,7 @@ class MyApp extends PolymerElement {
    
   </style>
 
-      <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+      <app-location route="{{route}}" url-space-regex="^[[rootPath]]" >
       </app-location>
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
       </app-route>
@@ -122,7 +122,7 @@ class MyApp extends PolymerElement {
                       <app-toolbar>
                         <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
                         <div main-title="" style="color:white">
-                      Application Name
+                      ING Online Banking Application
                         
                         </div>
                         <!--
@@ -143,7 +143,7 @@ class MyApp extends PolymerElement {
                     
                     <iron-pages selected="[[page]]" attr-for-selected="name" role="main"   style="background-color:white">
                             <editable-name-tag  name="dashboard"></editable-name-tag>
-                            <configurable-name-tag name="login"></configurable-name-tag>
+                            <login-element name="login"></login-element>
                             <test-element name="test"></test-element>
                             <page-not-found name="pagenotfound"></page-not-found>
                     </iron-pages>
@@ -247,7 +247,7 @@ class MyApp extends PolymerElement {
     } else if (['dashboard', 'report', 'login', 'test'].indexOf(page) !== -1) {
       this.page = page;
     } else {
-      //this.page = 'pagenotfound';
+      this.page = 'pagenotfound';
     }
 
     // Close a non-persistent drawer when the page & route are changed.

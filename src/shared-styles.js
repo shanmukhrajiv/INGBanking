@@ -23,6 +23,9 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
 
       --app-active-boutton-bg: #ff6200!important
     }
+    .cardStyle{
+      margin:20px;border:5px solid beige; background-color:bisque
+    }
     paper-card{
       margin: 3%;
     }

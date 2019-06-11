@@ -3,7 +3,7 @@ import '@polymer/paper-card/paper-card.js';
 import '@polymer/paper-button/paper-button.js';
 import '@polymer/iron-form/iron-form.js';
 import '@polymer/paper-input/paper-input.js';
-class ConfigurableNameTag extends PolymerElement {
+class LoginElement extends PolymerElement {
   static get properties () {
     return {
       // Configure owner property
@@ -14,8 +14,7 @@ class ConfigurableNameTag extends PolymerElement {
       baseUrl:
       {
         type: String,
-        //value: "http://10.117.189.210:9090/app"
-        value:" http://localhost:3000"
+        value: "http://10.117.189.210:8090/app"
       },
     };
   }
@@ -112,13 +111,13 @@ color:white;
       <div class="horizontal justified">
         <iron-form id="loginForm">
           <form >
-              <paper-input name="name" label="Customer id" value="{{accountId}}" required auto-validate></paper-input>
-              <paper-input name="password" type="password" label="Password" value="{{password}}" required auto-validate></paper-input>
+              <paper-input name="name" label="Customer id" value="{{accountId}}" required auto-validate  error-message="Please Enter Customer id "></paper-input>
+              <paper-input name="password" type="password" label="Password" value="{{password}}" required auto-validate error-message="Please Enter Password  "></paper-input>
               <paper-button raised >
                 <paper-spinner id="spinner"  on-click="_loginAuthication">Continue</paper-spinner></paper-button>
               <paper-button raised on-click="_resetForm">Reset</paper-button>
        </form>
-  <div class="output"></div>
+  
 </iron-form>
     </div>
       </paper-card>
@@ -141,7 +140,7 @@ color:white;
   _loginAuthication() {
     
     
-      
+
    const isValidate = this.$.loginForm.validate();
      console.log(this.$.loginForm.validate())
      if (isValidate) {
@@ -166,19 +165,12 @@ color:white;
   _onResponse(event,request) {
     const req = event.detail; 
     const statuscode = req.status
-   // var result = req.response;
-var result={
-  loginId: 1003,
-  accountId: 100,
-  password: "abc",
-}
-    console.log("Result:"+JSON.stringify(result));
-    console.log('status code', req.status);
-    console.log('status text', req.statusText);
-                    // this.$.alertdialog.open();
-        if(req.statusText=="Created"){
-          sessionStorage.setItem("userDetails", JSON.stringify(result));
-          localStorage.loggedInId= result.loginId;
+    var result = req.response;
+      // this.$.alertdialog.open();
+        if(result){
+          //localStorage.loggedInId= result.loginId;
+          localStorage.setItem("userDetails", JSON.stringify(result));
+          localStorage.accountId =result.account.accountId;
           window.history.pushState({}, null, '/dashboard');
           window.dispatchEvent(new CustomEvent("location-changed"));
 
@@ -189,14 +181,10 @@ var result={
     const req = event.detail; // iron-request
     const statuscode = req.status
     var result = req.response;
-    console.log("Result:"+JSON.stringify(result));
-    console.log('status code', req.status);
-    console.log('status text', req.statusText);
-    // I think one of those two would be what you're looking for.
-    console.log(event.detail.response);
-    alert( "Something Went Wrong!");
+      alert(result.message);
+    //alert( "Something Went Wrong!");
    
    
   }
 }
-customElements.define('configurable-name-tag', ConfigurableNameTag);
+customElements.define('login-element', LoginElement);
