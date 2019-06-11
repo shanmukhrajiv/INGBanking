@@ -8,4 +8,6 @@ import com.banking.entity.Login;
 @Repository
 public interface LoginRepository extends JpaRepository<Login, Long>{
 
+	Login findByAccountAccountIdAndPassword(Long accountId, String password);
+
 }
