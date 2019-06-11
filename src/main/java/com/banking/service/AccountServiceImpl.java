@@ -1,5 +1,7 @@
 package com.banking.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,12 @@ public class AccountServiceImpl implements AccountService{
         }
 
         return account;
+    }
+    
+    @Override
+    public List<Account> getbeneficiary(Long accountId) {
+        
+        List<Account> accountList = accountRepository.findByAccountIdNotLike(accountId);
+        return accountList;
     }
 }

@@ -19,9 +19,15 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-	@GetMapping("/transferDetails/{accountId}")
+	@GetMapping("/transfer/{accountId}")
 	public List<Transaction> accountDetail(@PathVariable Long accountId) {
 		return transactionService.getAccountDetail(accountId);
+
+	}
+
+	@GetMapping("/transferDetails/{transactionId}")
+	public List<Transaction> accountTransferDetail(@PathVariable Long transactionId) {
+		return transactionService.getTransferAccountDetail(transactionId);
 
 	}
 

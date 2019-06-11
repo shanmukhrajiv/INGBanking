@@ -11,4 +11,6 @@ public interface TransactionService {
 
 	List<Transaction> getAccountDetail(Long accountId);
 
+	List<Transaction> getTransferAccountDetail(Long transactionId);
+
 }

@@ -18,6 +18,11 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<Transaction> getAccountDetail(Long accountId) {
 		return transactionRepository.findByAccountId(accountId);
 	}
+
+	@Override
+	public List<Transaction> getTransferAccountDetail(Long transactionId) {
+		return transactionRepository.findByTransactionId(transactionId);
+	}
 	
 
 }
