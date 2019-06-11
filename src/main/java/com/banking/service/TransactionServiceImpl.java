@@ -1,5 +1,6 @@
 package com.banking.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,10 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionRepository.findByTransactionId(transactionId);
 	}
 
+	@Override
 	public Transaction transferMoney(TransactionDto transactionDto) {
-		Account fromAccount = transactionRepository.findByFromAccountAccountId(transactionDto.getFromAccount());
-		Account toAccount = transactionRepository.findByToAccountAccountId(transactionDto.getToAccount());
+		Account fromAccount = accountRepository.findByAccountId(transactionDto.getFromAccount());
+		Account toAccount = accountRepository.findByAccountId(transactionDto.getToAccount());
 
 		if (fromAccount != null && toAccount != null) {
 			if (fromAccount.getBalance() >= transactionDto.getTransferAmount()) {
@@ -45,11 +47,11 @@ public class TransactionServiceImpl implements TransactionService {
 				fromAccountTransaction.setTransferAmount(transactionDto.getTransferAmount());
 				fromAccountTransaction.setComment(transactionDto.getComment());
 				fromAccountTransaction.setTransferType(Debit);
+				fromAccountTransaction.setTransactionDate(new Date());
 				transactionRepository.save(fromAccountTransaction);
 
-				Account debitAcc = accountRepository.findByAccountId(fromAccount.getAccountId());
-				debitAcc.setBalance(debitAcc.getBalance() - transactionDto.getTransferAmount());
-				accountRepository.save(debitAcc);
+				fromAccount.setBalance(fromAccount.getBalance() - transactionDto.getTransferAmount());
+				accountRepository.save(fromAccount);
 
 				Transaction toAccountTransaction = new Transaction();
 				toAccountTransaction.setFromAccount(toAccount);
@@ -57,7 +59,12 @@ public class TransactionServiceImpl implements TransactionService {
 				toAccountTransaction.setTransferAmount(transactionDto.getTransferAmount());
 				toAccountTransaction.setComment(transactionDto.getComment());
 				toAccountTransaction.setTransferType(Credit);
+				toAccountTransaction.setTransactionDate(new Date());
 				transactionRepository.save(toAccountTransaction);
+
+				toAccount.setBalance(toAccount.getBalance() + transactionDto.getTransferAmount());
+				accountRepository.save(toAccount);
+
 				return fromAccountTransaction;
 			} else {
 				throw new ApplicationException("Insuffient Balance!!");
