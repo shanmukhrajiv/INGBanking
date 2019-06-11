@@ -8,4 +8,6 @@ import com.banking.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
+	Account findByAccountId(Long accountId);
+
 }

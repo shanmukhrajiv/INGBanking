@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Login.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">INGBanking</a> &gt; <a href="index.source.html" class="el_package">com.banking.entity</a> &gt; <span class="el_source">Login.java</span></div><h1>Login.java</h1><pre class="source lang-java linenums">package com.banking.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+public class Login implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long loginId;
+//	private Long accountId;
+	private String password;
+	@Temporal(TemporalType.DATE)
+	private Date createdDate;
+	@Temporal(TemporalType.DATE)
+	private Date modifiedDate;
+	private String createdBy;
+	private String modifiedBy;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = &quot;account_Login_id&quot;)
+	private Account account;
+
+	public Long getLoginId() {
+<span class="nc" id="L37">		return loginId;</span>
+	}
+
+	public void setLoginId(Long loginId) {
+<span class="nc" id="L41">		this.loginId = loginId;</span>
+<span class="nc" id="L42">	}</span>
+
+	/*
+	 * public Long getAccountId() { return accountId; }
+	 * 
+	 * public void setAccountId(Long accountId) { this.accountId = accountId; }
+	 */
+
+	public String getPassword() {
+<span class="nc" id="L51">		return password;</span>
+	}
+
+	public void setPassword(String password) {
+<span class="nc" id="L55">		this.password = password;</span>
+<span class="nc" id="L56">	}</span>
+
+	public Date getCreatedDate() {
+<span class="nc" id="L59">		return createdDate;</span>
+	}
+
+	public void setCreatedDate(Date createdDate) {
+<span class="nc" id="L63">		this.createdDate = createdDate;</span>
+<span class="nc" id="L64">	}</span>
+
+	public Date getModifiedDate() {
+<span class="nc" id="L67">		return modifiedDate;</span>
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+<span class="nc" id="L71">		this.modifiedDate = modifiedDate;</span>
+<span class="nc" id="L72">	}</span>
+
+	public String getCreatedBy() {
+<span class="nc" id="L75">		return createdBy;</span>
+	}
+
+	public void setCreatedBy(String createdBy) {
+<span class="nc" id="L79">		this.createdBy = createdBy;</span>
+<span class="nc" id="L80">	}</span>
+
+	public String getModifiedBy() {
+<span class="nc" id="L83">		return modifiedBy;</span>
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+<span class="nc" id="L87">		this.modifiedBy = modifiedBy;</span>
+<span class="nc" id="L88">	}</span>
+
+	public Account getAccount() {
+<span class="nc" id="L91">		return account;</span>
+	}
+
+	public void setAccount(Account account) {
+<span class="nc" id="L95">		this.account = account;</span>
+<span class="nc" id="L96">	}</span>
+
+	
+	public Login() {
+<span class="fc" id="L100">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L102">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L106">		return &quot;Login [loginId=&quot; + loginId + &quot;, password=&quot; + password + &quot;, createdDate=&quot; + createdDate</span>
+				+ &quot;, modifiedDate=&quot; + modifiedDate + &quot;, createdBy=&quot; + createdBy + &quot;, modifiedBy=&quot; + modifiedBy
+				+ &quot;, account=&quot; + account + &quot;]&quot;;
+	}
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

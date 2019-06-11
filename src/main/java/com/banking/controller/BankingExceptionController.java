@@ -2,12 +2,14 @@ package com.banking.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.banking.dto.Message;
 import com.banking.exception.ApplicationException;
 
 
+@ControllerAdvice
 public class BankingExceptionController {
 	
 	@ExceptionHandler(value = ApplicationException.class)

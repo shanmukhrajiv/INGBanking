@@ -1,6 +1,6 @@
 package com.banking.exception;
 
-public class ApplicationException extends RuntimeException {
+public class ApplicationException extends Exception {
 
 	/**
 	 * 
