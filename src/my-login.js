@@ -14,7 +14,8 @@ class LoginElement extends PolymerElement {
       baseUrl:
       {
         type: String,
-        value: "http://10.117.189.210:8090/app"
+        //value: "http://10.117.189.210:8090/app"
+        value: "http://52.66.210.171:8090/app"
       },
     };
   }

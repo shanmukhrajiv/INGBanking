@@ -21,7 +21,7 @@ class EditableNameTag extends PolymerElement {
       {
         type: String,
         //value: "http://10.117.189.210:9090/app"
-        value: "http://10.117.189.210:8090/app"
+        value: "http://52.66.210.171:8090/app"
       },
       showLloggedInUserDetails: {//showLloggedInUserDetails,showTransferPage,showAccountDetailsPage
         type: Boolean,
@@ -100,6 +100,10 @@ class EditableNameTag extends PolymerElement {
     if (localStorage.apiname == "transfer") {
       this.loggedInUsrAccountDetails = result;
       if (this.loggedInUsraccountDetailNTrans) {
+        // showLloggedInUserDetails,showTransferPage,showAccountDetailsPage
+        this.showLloggedInUserDetails = true;
+        this.showTransferPage =false;
+        this.showAccountDetailsPage=false;
         alert("Successfully Tranaction Done");
       }
 
@@ -294,7 +298,7 @@ class EditableNameTag extends PolymerElement {
   </paper-card>
   </template>
   
-
+ 
 <!--Account Details Page-->
 <template is="dom-if" if="{{showAccountDetailsPage}}">
 <paper-card heading="Product Details and List of Statements" image="" alt="Emmental" class="cardStyle">
