@@ -49,6 +49,6 @@ public class LoginServiceImplTest {
 	public void testLogin() {
 		Mockito.when(loginRepository.findByAccountAccountIdAndPassword(loginDto.getAccountId(), loginDto.getPassword())).thenReturn(login);
 		Login actval = loginServiceImpl.validateLogin(loginDto);
-		Assert.assertEquals("Rohit", actval.getCreatedBy());
+		Assert.assertEquals("xyz", actval.getPassword());
 	}
 }
