@@ -2,6 +2,8 @@ package com.banking.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import com.banking.repository.TransactionRepository;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
+	private static Logger logger = Logger.getLogger(TransactionServiceImpl.class.getName());
+
 	@Autowired
 	TransactionRepository transactionRepository;
 
@@ -26,16 +30,19 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<Transaction> getAccountDetail(Long accountId) {
+		logger.info("Inside account detail method");
 		return transactionRepository.findByAccountId(accountId);
 	}
 
 	@Override
 	public Transaction getTransferAccountDetail(Long transactionId) {
+		logger.info("Inside transfer account detail method");
 		return transactionRepository.findByTransactionId(transactionId);
 	}
 
 	@Override
 	public Transaction transferMoney(TransactionDto transactionDto) {
+		logger.info("Inside transfer money method");
 		Account fromAccount = accountRepository.findByAccountId(transactionDto.getFromAccount());
 		Account toAccount = accountRepository.findByAccountId(transactionDto.getToAccount());
 
@@ -67,9 +74,11 @@ public class TransactionServiceImpl implements TransactionService {
 
 				return fromAccountTransaction;
 			} else {
+				//logger.log(Level.SEVERE, "Insufficient  balance");
 				throw new ApplicationException("Insuffient Balance!!");
 			}
 		} else {
+			//logger.log(Level.SEVERE, "Invalid Account");
 			throw new ApplicationException("Invalid Account!! Please use valid account for transfer");
 		}
 	}

@@ -13,7 +13,7 @@ import com.banking.repository.LoginRepository;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-	
+
 	@Autowired
 	LoginRepository loginRepository;
 
@@ -22,10 +22,12 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public Login validateLogin(LoginDto loginDto) {
 		logger.log(Level.FINE, "suceess", "");
+		logger.info("Inside login validation method");
 		Login login = new Login();
 		try {
 			login = loginRepository.findByAccountAccountIdAndPassword(loginDto.getAccountId(), loginDto.getPassword());
 			if (login == null)
+				//logger.log(Level.SEVERE, "Invalid Login user");
 				throw new ApplicationException("Invalid User!!");
 		} catch (Exception e) {
 			throw new ApplicationException("Invalid User");
