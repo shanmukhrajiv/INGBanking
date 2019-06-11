@@ -13,8 +13,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.banking.dto.TransactionDto;
 import com.banking.entity.Account;
 import com.banking.entity.Transaction;
+import com.banking.repository.AccountRepository;
 import com.banking.repository.TransactionRepository;
 
 import junit.framework.Assert;
@@ -27,6 +29,9 @@ public class TransactionServiceImplTest {
 
 	@Mock
 	TransactionRepository transactionRepository;
+	
+	@Mock
+	AccountRepository accountRepository;
 
 	static Transaction transaction = new Transaction();
 
@@ -34,6 +39,7 @@ public class TransactionServiceImplTest {
 	static Transaction transaction1 = new Transaction();
 	static Account account1 = new Account();
 	static List<Transaction> lst = new ArrayList<Transaction>();
+	static TransactionDto  transactionDto = new TransactionDto();
 
 	@BeforeClass
 	public static void setUp() {
@@ -75,6 +81,16 @@ public class TransactionServiceImplTest {
 		transaction1.setTransferType("debit");
 
 		lst.add(transaction1);
+		
+		transactionDto.setAfterAccountBalance(1100);
+		transactionDto.setBeforeAccountBalance(1200);
+		transactionDto.setComment("transfer");
+		transactionDto.setFromAccount(1L);
+		transactionDto.setToAccount(2L);
+		transactionDto.setTransactionId(12L);
+		transactionDto.setTransferAmount(120);
+		transactionDto.setTransferType("debit");
+		
 
 	}
 
@@ -91,6 +107,14 @@ public class TransactionServiceImplTest {
 		List<Transaction> actval = transactionServiceImpl.getAccountDetail(account.getAccountId());
 		Assert.assertEquals(1, actval.size());
 
+	}
+	
+	@Test
+	public void testTransferMoney() {
+		Mockito.when(accountRepository.findByAccountId(1L)).thenReturn(account);
+		Mockito.when(accountRepository.findByAccountId(2L)).thenReturn(account);
+		Transaction actval3= transactionServiceImpl.transferMoney(transactionDto);
+		Assert.assertEquals(120.0, actval3.getTransferAmount());
 	}
 	
 }
