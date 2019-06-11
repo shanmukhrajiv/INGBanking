@@ -51,4 +51,5 @@ public class LoginServiceImplTest {
 		Login actval = loginServiceImpl.validateLogin(loginDto);
 		Assert.assertEquals("xyz", actval.getPassword());
 	}
+	
 }
