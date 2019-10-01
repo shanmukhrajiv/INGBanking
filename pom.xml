@@ -65,6 +65,13 @@
 			<version>2.9.2</version>
 		</dependency>
 	</dependencies>
+	
+	<distributionManagement>
+          <snapshotRepository>
+          <id>nexus</id>
+          <url>http://http://54.152.74.219:8081/nexus/content/repositories/snapshots/</url>
+       </snapshotRepository>
+ </distributionManagement>
 
 	<build>
 		<plugins>
